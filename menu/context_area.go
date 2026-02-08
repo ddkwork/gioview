@@ -92,7 +92,22 @@ func (r *ContextArea) Update(gtx C) {
 			r.active = true
 			r.justActivated = true
 			if !r.AbsolutePosition {
-				r.position = e.Position
+				// Get window size for position hint calculation
+				windowSize := image.Point{X: 0, Y: 0}
+				if ws, ok := gtx.Values["windowSize"].(image.Point); ok {
+					windowSize = ws
+				}
+				// Calculate absolute position using the Transform field
+				absolutePos := e.Transform.Transform(e.Position)
+				// 输出锚点坐标
+				println("相对锚点: X=", e.Position.X, "Y=", e.Position.Y)
+				println("绝对锚点: X=", absolutePos.X, "Y=", absolutePos.Y)
+				println("窗口大小: X=", windowSize.X, "Y=", windowSize.Y)
+				// Set PositionHint based on click position (use relative position for hint calculation)
+				r.setPositionHintFromClick(absolutePos, windowSize)
+				println("PositionHint:", r.PositionHint)
+				// Store the absolute position
+				r.position = absolutePos
 			}
 		}
 	}
@@ -136,25 +151,42 @@ func (r *ContextArea) Layout(gtx C, w layout.Widget) D {
 	}
 
 	if r.active {
-		if int(r.position.X)+r.dims.Size.X > dims.Size.X {
-			if newX := int(r.position.X) - r.dims.Size.X; newX < 0 {
+		// Get window size from gtx.Values or fallback to Constraints.Max
+		windowSize := image.Point{X: gtx.Constraints.Max.X, Y: gtx.Constraints.Max.Y}
+		if ws, ok := gtx.Values["windowSize"].(image.Point); ok && (ws.X > 0 || ws.Y > 0) {
+			windowSize = ws
+		}
+
+		// Check for horizontal overflow
+		if windowSize.X > 0 && int(r.position.X)+r.dims.Size.X > windowSize.X {
+			newX := int(r.position.X) - r.dims.Size.X
+			if newX < 0 {
+				// Even shifting left would overflow, so clamp based on PositionHint
 				switch r.PositionHint {
 				case layout.E, layout.NE, layout.SE:
-					r.position.X = float32(dims.Size.X - r.dims.Size.X)
+					r.position.X = float32(windowSize.X - r.dims.Size.X)
 				case layout.W, layout.NW, layout.SW:
 					r.position.X = 0
+				default:
+					r.position.X = float32(windowSize.X - r.dims.Size.X)
 				}
 			} else {
 				r.position.X = float32(newX)
 			}
 		}
-		if int(r.position.Y)+r.dims.Size.Y > dims.Size.Y {
-			if newY := int(r.position.Y) - r.dims.Size.Y; newY < 0 {
+
+		// Check for vertical overflow
+		if windowSize.Y > 0 && int(r.position.Y)+r.dims.Size.Y > windowSize.Y {
+			newY := int(r.position.Y) - r.dims.Size.Y
+			if newY < 0 {
+				// Even shifting up would overflow, so clamp based on PositionHint
 				switch r.PositionHint {
 				case layout.S, layout.SE, layout.SW:
-					r.position.Y = float32(dims.Size.Y - r.dims.Size.Y)
+					r.position.Y = float32(windowSize.Y - r.dims.Size.Y)
 				case layout.N, layout.NE, layout.NW:
 					r.position.Y = 0
+				default:
+					r.position.Y = float32(windowSize.Y - r.dims.Size.Y)
 				}
 			} else {
 				r.position.Y = float32(newY)
@@ -177,6 +209,7 @@ func (r *ContextArea) Layout(gtx C, w layout.Widget) D {
 			X: int(math.Round(float64(r.position.X))),
 			Y: int(math.Round(float64(r.position.Y))),
 		}
+		println("菜单最终位置: X=", pos.X, "Y=", pos.Y, "尺寸: W=", r.dims.Size.X, "H=", r.dims.Size.Y)
 		macro := op.Record(gtx.Ops)
 		op.Offset(pos).Add(gtx.Ops)
 		contextual.Add(gtx.Ops)
@@ -221,4 +254,49 @@ func (r *ContextArea) Dismissed() bool {
 		r.justDismissed = false
 	}()
 	return r.justDismissed
+}
+
+// setPositionHintFromClick automatically sets PositionHint based on click position.
+func (r *ContextArea) setPositionHintFromClick(clickPos f32.Point, windowSize image.Point) {
+	// Special handling: if click is in top area (Y < 100), force display downward
+	if clickPos.Y < 100 {
+		r.PositionHint = layout.SW
+		return
+	}
+
+	// Calculate distances to each edge
+	distToTop := clickPos.Y
+	distToBottom := float32(windowSize.Y) - clickPos.Y
+	distToLeft := clickPos.X
+	distToRight := float32(windowSize.X) - clickPos.X
+
+	// Determine vertical direction
+	var vertical layout.Direction
+	if distToBottom > distToTop {
+		vertical = layout.S // Display downward
+	} else {
+		vertical = layout.N // Display upward
+	}
+
+	// Determine horizontal direction
+	var horizontal layout.Direction
+	if distToRight > distToLeft {
+		horizontal = layout.E // Display rightward
+	} else {
+		horizontal = layout.W // Display leftward
+	}
+
+	// Combine directions
+	switch {
+	case vertical == layout.S && horizontal == layout.E:
+		r.PositionHint = layout.SE
+	case vertical == layout.S && horizontal == layout.W:
+		r.PositionHint = layout.SW
+	case vertical == layout.N && horizontal == layout.E:
+		r.PositionHint = layout.NE
+	case vertical == layout.N && horizontal == layout.W:
+		r.PositionHint = layout.NW
+	default:
+		r.PositionHint = layout.SE // Default to bottom-right
+	}
 }
