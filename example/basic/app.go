@@ -38,7 +38,6 @@ func (ui *UI) Loop() error {
 			if gtx.Values == nil {
 				gtx.Values = make(map[string]any)
 			}
-			gtx.Values["windowSize"] = e.Size
 			ui.layout(gtx)
 			e.Frame(gtx.Ops)
 		}

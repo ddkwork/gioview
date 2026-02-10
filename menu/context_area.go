@@ -93,10 +93,7 @@ func (r *ContextArea) Update(gtx C) {
 			r.justActivated = true
 			if !r.AbsolutePosition {
 				// Get window size for position hint calculation
-				windowSize := image.Point{X: 0, Y: 0}
-				if ws, ok := gtx.Values["windowSize"].(image.Point); ok {
-					windowSize = ws
-				}
+				windowSize := gtx.WindowSize
 				// Calculate absolute position using the Transform field
 				absolutePos := e.Transform.Transform(e.Position)
 				// 输出锚点坐标
@@ -152,10 +149,7 @@ func (r *ContextArea) Layout(gtx C, w layout.Widget) D {
 
 	if r.active {
 		// Get window size from gtx.Values or fallback to Constraints.Max
-		windowSize := image.Point{X: gtx.Constraints.Max.X, Y: gtx.Constraints.Max.Y}
-		if ws, ok := gtx.Values["windowSize"].(image.Point); ok && (ws.X > 0 || ws.Y > 0) {
-			windowSize = ws
-		}
+		windowSize := gtx.WindowSize
 
 		// Check for horizontal overflow
 		if windowSize.X > 0 && int(r.position.X)+r.dims.Size.X > windowSize.X {
