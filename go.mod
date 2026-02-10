@@ -7,11 +7,11 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/go-text/typesetting v0.3.0
 	github.com/shirou/gopsutil/v4 v4.26.1
-	golang.org/x/exp v0.0.0-20260112195511-716be5621a96
-	golang.org/x/exp/shiny v0.0.0-20260112195511-716be5621a96
-	golang.org/x/image v0.35.0
-	golang.org/x/sys v0.40.0
-	golang.org/x/text v0.33.0
+	golang.org/x/exp v0.0.0-20260209203927-2842357ff358
+	golang.org/x/exp/shiny v0.0.0-20260209203927-2842357ff358
+	golang.org/x/image v0.36.0
+	golang.org/x/sys v0.41.0
+	golang.org/x/text v0.34.0
 )
 
 require (
@@ -19,7 +19,7 @@ require (
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
-	golang.org/x/net v0.49.0 // indirect
+	golang.org/x/net v0.50.0 // indirect
 )
 
-replace gioui.org v0.9.0 => github.com/ddkwork/gio v0.0.0-20260208060751-affcc3738338
+replace gioui.org v0.9.0 => github.com/ddkwork/gio v0.0.0-20260210191615-6e08ebbb1286
