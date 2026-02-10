@@ -34,10 +34,6 @@ func (ui *UI) Loop() error {
 			return e.Err
 		case app.FrameEvent:
 			gtx := app.NewContext(&ops, e)
-			// Pass window size to context for menu positioning
-			if gtx.Values == nil {
-				gtx.Values = make(map[string]any)
-			}
 			ui.layout(gtx)
 			e.Frame(gtx.Ops)
 		}
