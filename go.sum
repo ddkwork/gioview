@@ -2,8 +2,8 @@ eliasnaur.com/font v0.0.0-20230308162249-dd43949cb42d h1:ARo7NCVvN2NdhLlJE9xAbKw
 eliasnaur.com/font v0.0.0-20230308162249-dd43949cb42d/go.mod h1:OYVuxibdk9OSLX8vAqydtRPP87PyTFcT9uH3MlEGBQA=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/ddkwork/gio v0.0.0-20260210191615-6e08ebbb1286 h1:Ks7yvTpQu7N0vDdhxP3o9WiH9hEEBRNYexPv5o56ztM=
-github.com/ddkwork/gio v0.0.0-20260210191615-6e08ebbb1286/go.mod h1:rUwrOyKK34U9nSLixMFbY1ZL1adiEH6zls7F/fS2Vx0=
+github.com/ddkwork/gio v0.0.0-20260213042634-1236dd49ffee h1:UcwPqKsx/OrPjWjP4TTpc9WU2vRlywY4mnVeo9hOTYw=
+github.com/ddkwork/gio v0.0.0-20260213042634-1236dd49ffee/go.mod h1:+NRprda4mcYaMFaNP8bTyaRByogOPpiGFRX3Ufpy+Ao=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
 github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=
 github.com/ebitengine/purego v0.9.1 h1:a/k2f2HQU3Pi399RPW1MOaZyhKJL9w/xFpKAg4q1s0A=
@@ -25,10 +25,10 @@ github.com/stretchr/testify v1.11.1 h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu
 github.com/stretchr/testify v1.11.1/go.mod h1:wZwfW3scLgRK+23gO65QZefKpKQRnfz6sD981Nm4B6U=
 github.com/yusufpapurcu/wmi v1.2.4 h1:zFUKzehAFReQwLys1b/iSMl+JQGSCSjtVqQn9bBrPo0=
 github.com/yusufpapurcu/wmi v1.2.4/go.mod h1:SBZ9tNy3G9/m5Oi98Zks0QjeHVDvuK0qfxQmPyzfmi0=
-golang.org/x/exp v0.0.0-20260209203927-2842357ff358 h1:kpfSV7uLwKJbFSEgNhWzGSL47NDSF/5pYYQw1V0ub6c=
-golang.org/x/exp v0.0.0-20260209203927-2842357ff358/go.mod h1:R3t0oliuryB5eenPWl3rrQxwnNM3WTwnsRZZiXLAAW8=
-golang.org/x/exp/shiny v0.0.0-20260209203927-2842357ff358 h1:cPCrmjVzlx/yVDBr1S7Pl3TFo5vEAFrus5a139vIg6Q=
-golang.org/x/exp/shiny v0.0.0-20260209203927-2842357ff358/go.mod h1:NJvadzWdysRnMQ01yaqBdZglv1MjdIvnn5KrwzzrYp8=
+golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a h1:ovFr6Z0MNmU7nH8VaX5xqw+05ST2uO1exVfZPVqRC5o=
+golang.org/x/exp v0.0.0-20260212183809-81e46e3db34a/go.mod h1:K79w1Vqn7PoiZn+TkNpx3BUWUQksGO3JcVX6qIjytmA=
+golang.org/x/exp/shiny v0.0.0-20260212183809-81e46e3db34a h1:pCkykR/N0jWVZoY0vl/3zjgys3YxHlrcTlJ/xL9ZMps=
+golang.org/x/exp/shiny v0.0.0-20260212183809-81e46e3db34a/go.mod h1:zxsA7NyDTOUjcveVwAMFI/YIErWwayTW/4RGqB/RzKk=
 golang.org/x/image v0.36.0 h1:Iknbfm1afbgtwPTmHnS2gTM/6PPZfH+z2EFuOkSbqwc=
 golang.org/x/image v0.36.0/go.mod h1:YsWD2TyyGKiIX1kZlu9QfKIsQ4nAAK9bdgdrIsE7xy4=
 golang.org/x/net v0.50.0 h1:ucWh9eiCGyDR3vtzso0WMQinm2Dnt8cFMuQa9K33J60=

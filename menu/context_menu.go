@@ -1,6 +1,7 @@
 package menu
 
 import (
+	"gioui.org/x/component"
 	"github.com/oligo/gioview/theme"
 
 	"gioui.org/io/pointer"
@@ -9,7 +10,7 @@ import (
 
 type ContextMenu struct {
 	Menu
-	contextArea ContextArea
+	contextArea component.ContextArea
 	// position hint
 	PositionHint layout.Direction
 }
