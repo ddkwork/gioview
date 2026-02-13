@@ -3,6 +3,8 @@
 #
 # Binaries for programs and plugins
 *.exe
+*.bat
+*.ps1
 *.exe~
 *.dll
 *.so
@@ -21,3 +23,4 @@
 go.work
 .DS_Store
 
+.idea
