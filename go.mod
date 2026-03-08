@@ -1,6 +1,6 @@
 module github.com/oligo/gioview
 
-go 1.26
+go 1.26.1
 
 require (
 	gioui.org v0.9.0
